@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTimeSyncTools-winform", "NetTimeSyncTools-winform\NetTimeSyncTools-winform.csproj", "{292C00B0-6D84-4187-8A8D-BD8B187E022A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{292C00B0-6D84-4187-8A8D-BD8B187E022A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292C00B0-6D84-4187-8A8D-BD8B187E022A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292C00B0-6D84-4187-8A8D-BD8B187E022A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292C00B0-6D84-4187-8A8D-BD8B187E022A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAB58C89-B532-41DC-9BD9-09822B85CEF5}
+	EndGlobalSection
+EndGlobal
