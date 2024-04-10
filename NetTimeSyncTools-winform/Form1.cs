@@ -33,6 +33,13 @@ namespace NetTimeSyncTools_winform
             int startedTime = Environment.TickCount;
             startTime.Text = $"{startedTime / 3600000}:{plusZero(startedTime / 60000 % 60)}:{plusZero(startedTime / 1000 % 60)}";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainDialog form = new MainDialog();
+            form.ShowDialog(this);
+            
+        }
     }
     
 }

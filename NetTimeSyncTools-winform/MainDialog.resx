@@ -117,73 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ServerName.Text" xml:space="preserve">
-    <value>名称</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ServerName.Width" type="System.Int32, mscorlib">
-    <value>158</value>
-  </data>
-  <data name="ServerURL.Text" xml:space="preserve">
-    <value>服务器地址</value>
-  </data>
-  <data name="ServerURL.Width" type="System.Int32, mscorlib">
-    <value>138</value>
-  </data>
-  <data name="ServerIP.Text" xml:space="preserve">
-    <value>IP地址</value>
-  </data>
-  <data name="ServerIP.Width" type="System.Int32, mscorlib">
-    <value>111</value>
-  </data>
-  <data name="ServerTime.Text" xml:space="preserve">
-    <value>服务器时间</value>
-  </data>
-  <data name="ServerTime.Width" type="System.Int32, mscorlib">
-    <value>126</value>
-  </data>
-  <data name="serverStatus.Text" xml:space="preserve">
-    <value>服务器状态</value>
-  </data>
-  <data name="serverStatus.Width" type="System.Int32, mscorlib">
-    <value>183</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="listView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 101</value>
-  </data>
-  <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 284</value>
-  </data>
-  <data name="listView1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
-    <value>listView1</value>
-  </data>
-  <data name="&gt;&gt;listView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listView1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 14</value>
+    <value>27, 78</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 15</value>
+    <value>82, 15</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>本地时间</value>
+    <value>服务器地址</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -195,22 +144,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 42</value>
+    <value>27, 26</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 15</value>
+    <value>37, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>开机时间</value>
+    <value>命名</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -222,94 +171,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 26</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 72</value>
+  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 25</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 15</value>
+  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
+    <value>textBox1</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 75</value>
+  </data>
+  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 25</value>
+  </data>
+  <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>网络时间表</value>
+  <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
+    <value>textBox2</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;textBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="localtimes.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="localtimes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 14</value>
-  </data>
-  <data name="localtimes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
-  </data>
-  <data name="localtimes.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;localtimes.Name" xml:space="preserve">
-    <value>localtimes</value>
-  </data>
-  <data name="&gt;&gt;localtimes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;localtimes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;localtimes.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="startTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="startTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 42</value>
-  </data>
-  <data name="startTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
-  </data>
-  <data name="startTime.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;startTime.Name" xml:space="preserve">
-    <value>startTime</value>
-  </data>
-  <data name="&gt;&gt;startTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;startTime.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;startTime.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 391</value>
+    <value>336, 157</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 34</value>
+    <value>129, 28</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="button1.Text" xml:space="preserve">
-    <value>添加服务器(&amp;A)</value>
+    <value>确认(&amp;O)</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
@@ -321,19 +237,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 391</value>
+    <value>482, 157</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 34</value>
+    <value>129, 28</value>
   </data>
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
-    <value>编辑服务器(&amp;E)</value>
+    <value>取消(&amp;C)</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
@@ -345,83 +261,71 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>290, 391</value>
-  </data>
-  <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 34</value>
-  </data>
-  <data name="button3.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="button3.Text" xml:space="preserve">
-    <value>删除服务器(&amp;D)</value>
-  </data>
-  <data name="&gt;&gt;button3.Name" xml:space="preserve">
-    <value>button3</value>
-  </data>
-  <data name="&gt;&gt;button3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 391</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 34</value>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 125</value>
   </data>
-  <data name="button4.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 15</value>
   </data>
-  <data name="button4.Text" xml:space="preserve">
-    <value>时钟同步(&amp;S)</value>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;button4.Name" xml:space="preserve">
-    <value>button4</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>选择协议版本</value>
   </data>
-  <data name="&gt;&gt;button4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
-  <data name="&gt;&gt;button4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>655, 391</value>
+  <data name="comboBox1.Items" xml:space="preserve">
+    <value>Network Time Protocal (RFC 958, 1985.9) </value>
   </data>
-  <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 34</value>
+  <data name="comboBox1.Items1" xml:space="preserve">
+    <value>Network Time Protocal Version 1 (RFC 1059, 1988.7)</value>
   </data>
-  <data name="button5.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="comboBox1.Items2" xml:space="preserve">
+    <value>Network Time Protocal Version 2 (RFC 1119, 1989.9)</value>
   </data>
-  <data name="button5.Text" xml:space="preserve">
-    <value>设置本机时间(&amp;T)</value>
+  <data name="comboBox1.Items3" xml:space="preserve">
+    <value>Network Time Protocal Version 3 (RFC 1315, 1992.3)</value>
   </data>
-  <data name="&gt;&gt;button5.Name" xml:space="preserve">
-    <value>button5</value>
+  <data name="comboBox1.Items4" xml:space="preserve">
+    <value>Network Time Protocal Version 4 (RFC 5905, 2010.6)</value>
   </data>
-  <data name="&gt;&gt;button5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 117</value>
   </data>
-  <data name="&gt;&gt;button5.Parent" xml:space="preserve">
+  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 23</value>
+  </data>
+  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
+    <value>comboBox1</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -429,49 +333,13 @@
     <value>8, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+    <value>656, 192</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>网络时钟同步器</value>
-  </data>
-  <data name="&gt;&gt;ServerName.Name" xml:space="preserve">
-    <value>ServerName</value>
-  </data>
-  <data name="&gt;&gt;ServerName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ServerURL.Name" xml:space="preserve">
-    <value>ServerURL</value>
-  </data>
-  <data name="&gt;&gt;ServerURL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ServerIP.Name" xml:space="preserve">
-    <value>ServerIP</value>
-  </data>
-  <data name="&gt;&gt;ServerIP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ServerTime.Name" xml:space="preserve">
-    <value>ServerTime</value>
-  </data>
-  <data name="&gt;&gt;ServerTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;serverStatus.Name" xml:space="preserve">
-    <value>serverStatus</value>
-  </data>
-  <data name="&gt;&gt;serverStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
-    <value>timer1</value>
-  </data>
-  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>服务器信息</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+    <value>MainDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
