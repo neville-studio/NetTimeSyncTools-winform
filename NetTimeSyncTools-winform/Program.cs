@@ -5,22 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 struct NTPInformation {
-    short Version_Number;
-    short Leap_Indicator;
-    short Mode;
-    short Stradium;
-    short Poll;
-    short Precision;
-    int SynchronizingDistance;
-    int SynchronizingDispersion;
-    int ReferenceIdentifier;
-    int ReferenceClockIdentifier;
-    long ReferenceTimeStamp;
-    long OriginateTimeStamp;
-    long ReceiveTimeStamp;
-    long TransmitTimeStamp;
-    int KeyIdentifier;
-    long CriptoCheckSum;
+
 
 }
 namespace NetTimeSyncTools_winform
