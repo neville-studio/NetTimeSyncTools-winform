@@ -27,5 +27,16 @@ namespace NetTimeSyncTools_winform
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NTPClass ntp1 = new NTPClass();
+            ntp1.serverName = serverNameBox.Text;
+            ntp1.Version_Number = 4;
+            ntp1.sendNTPpacket();
+            this.Dispose();
+        }
+
+    
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace NetTimeSyncTools_winform
 {
@@ -21,14 +22,14 @@ namespace NetTimeSyncTools_winform
     }
     internal class NTPClass
     {
-        short Version_Number;                // The maximum Version is 4.
-        short Leap_Indicator;
-        string serverName;
+        public ushort Version_Number;                // The maximum Version is 4.
+        ushort Leap_Indicator;
+        public string serverName;
         short status;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
         NTPExtensionField[] extensions = new NTPExtensionField[2];
-
+        uint Root_Delay;
         int error;
-        short Mode;
+        ushort Mode = 3;
         short Stradium;
         short Poll;
         short Precision;
@@ -43,7 +44,7 @@ namespace NetTimeSyncTools_winform
         int KeyIdentifier;
         long CriptoCheckSum;
         
-        void sendNTPpacket() {
+        public void sendNTPpacket() {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             
             IPAddress broadcast = IPAddress.Parse("192.168.1.255");
@@ -51,16 +52,22 @@ namespace NetTimeSyncTools_winform
             
             IPEndPoint ep = new IPEndPoint(broadcast, Constraint.NtpDefaultPort);
             s.Connect(serverName, 123);
-            byte[] sendbuf = Encoding.ASCII.GetBytes(args[0]);
+            byte[] sendbuf = NTPv4();
             s.SendTo(sendbuf, ep);
 
             //Console.WriteLine("Message sent to the broadcast address");
         }
         byte[] NTPv4() {
-            byte[] res;
-
-
-            return res;
+          List<byte> buf = new List<byte>(640);
+            buf.Add((byte)(Leap_Indicator<< 6 | Version_Number<< 3 | Mode));
+            buf.Add((byte)Stradium);
+            buf.Add((byte)Poll);
+            buf.Add((byte)Precision);
+            buf.Add((byte)(Root_Delay >> 24 &0xff));
+            buf.Add((byte)(Root_Delay >> 16 & 0xff));
+            buf.Add((byte)(Root_Delay >> 8 & 0xff));
+            buf.Add((byte)(Root_Delay & 0xff));
+            return buf.ToArray();
         }
     }
     class UDPListener
