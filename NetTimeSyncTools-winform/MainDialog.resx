@@ -173,25 +173,25 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="serverIdentifier.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 26</value>
   </data>
-  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="serverIdentifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 25</value>
   </data>
-  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="serverIdentifier.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
-    <value>textBox1</value>
+  <data name="&gt;&gt;serverIdentifier.Name" xml:space="preserve">
+    <value>serverIdentifier</value>
   </data>
-  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;serverIdentifier.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;serverIdentifier.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;serverIdentifier.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="serverNameBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -291,18 +291,9 @@
     <value>1</value>
   </data>
   <data name="comboBox1.Items" xml:space="preserve">
-    <value>Network Time Protocal (RFC 958, 1985.9) </value>
-  </data>
-  <data name="comboBox1.Items1" xml:space="preserve">
-    <value>Network Time Protocal Version 1 (RFC 1059, 1988.7)</value>
-  </data>
-  <data name="comboBox1.Items2" xml:space="preserve">
-    <value>Network Time Protocal Version 2 (RFC 1119, 1989.9)</value>
-  </data>
-  <data name="comboBox1.Items3" xml:space="preserve">
     <value>Network Time Protocal Version 3 (RFC 1315, 1992.3)</value>
   </data>
-  <data name="comboBox1.Items4" xml:space="preserve">
+  <data name="comboBox1.Items1" xml:space="preserve">
     <value>Network Time Protocal Version 4 (RFC 5905, 2010.6)</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -334,6 +325,10 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>656, 192</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>服务器信息</value>

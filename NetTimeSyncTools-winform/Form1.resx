@@ -131,7 +131,7 @@
     <value>138</value>
   </data>
   <data name="ServerIP.Text" xml:space="preserve">
-    <value>IP地址</value>
+    <value>时钟源</value>
   </data>
   <data name="ServerIP.Width" type="System.Int32, mscorlib">
     <value>111</value>

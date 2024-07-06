@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("NetTimeSyncTools-winform")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Net Time Sync Tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Neville Studio")]
 [assembly: AssemblyProduct("NetTimeSyncTools-winform")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©  2024 Neville Studio, all rights reserved")]
+[assembly: AssemblyTrademark("Neville Studio")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型

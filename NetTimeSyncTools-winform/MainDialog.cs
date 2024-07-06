@@ -15,6 +15,7 @@ namespace NetTimeSyncTools_winform
         public MainDialog()
         {
             InitializeComponent();
+         
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -31,9 +32,11 @@ namespace NetTimeSyncTools_winform
         private void button1_Click(object sender, EventArgs e)
         {
             NTPClass ntp1 = new NTPClass();
+            ntp1.serverIdentifier = serverIdentifier.Text;
             ntp1.serverName = serverNameBox.Text;
-            ntp1.Version_Number = 4;
+            ntp1.Version_Number = (ushort)(comboBox1.SelectedIndex + 3);
             ntp1.sendNTPpacket();
+            UserDefinedGlobalData.globalData.Add(ntp1);
             this.Dispose();
         }
 

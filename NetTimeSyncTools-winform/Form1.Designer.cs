@@ -57,8 +57,10 @@
             this.ServerIP,
             this.ServerTime,
             this.serverStatus});
+            this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
             resources.ApplyResources(this.listView1, "listView1");
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -162,6 +164,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.Activated += new System.EventHandler(this.Form1_Focus);
             this.ResumeLayout(false);
             this.PerformLayout();
 
