@@ -11,7 +11,6 @@ You can download this application source code and compile it. This Solution is b
 Windows OS which installed or running .NET Framework 4.6.2 or greater.
 
 P.S. That Means this Application is supported the following Operating System:
-- Windows Vista Service Pack 2*
 - Windows 7 Service Pack 1*
 - Windows 8.1*
 - Windows 10 Version 1507 or later
