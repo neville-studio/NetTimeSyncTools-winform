@@ -9,12 +9,19 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Threading;
+using System.Text.Json;
 using static System.Net.WebRequestMethods;
+using System.Text.Json.Serialization;
+using System.Text.Json.Nodes;
 
 namespace NetTimeSyncTools_winform
 {
-    static class Constraint {
+    static class NTPConstraint {
         public const int NtpDefaultPort = 123;
+        public const long NtpEpochMillSeconds = 0x100000000 * 1000;
+        public const long NtpUtcBaseDiff = 2208988800;
+        const string refidJSONString = "{\"LOCL\": \"Undisciplined Local Clock\",\"GOES\": \"Geosynchronous Orbit Environment Satellite\",\"GPS\": \"Global Position System\",\"GAL\": \"Galileo Positioning System\",\"PPS\": \"Generic pulse-per-second\",\"IRIG\": \"Inter-Range Instrumentation Group\",\"WWVB\": \"LF Radio WWVB Ft. Collins, CO 60 kHz\",\"DCF\": \"LF Radio DCF77 Mainflingen, DE 77.5 kHz\",\"HBG\": \"LF Radio HBG Prangins, HB 75 kHz\",\"MSF\": \"LF Radio MSF Anthorn, UK 60 kHz\",\"JJY\": \"LF Radio JJY Fukushima, JP 40 kHz, Saga, JP 60 kHz\",\"LORC\": \"MF Radio LORAN C station, 100 kHz\",\"TDF\": \"MF Radio Allouis, FR 162 kHz\",\"CHU\": \"HF Radio CHU Ottawa, Ontario\",\"WWV\": \"HF Radio WWV Ft. Collins, CO\",\"WWVH\": \"HF Radio WWVH Kauai, HI\",\"NIST\": \"NIST telephone modem\",\"ACTS\": \"NIST telephone modem\",\"USNO\": \"USNO telephone modem\",\"PTB\": \"European telephone modem\",\"BDS\": \"Beidou Navigation Satellite System\",\"PTP\": \"From an another Precession Time Protocal\"\r\n}";
+        public static Dictionary<string,string> refid = JsonDocument.Parse(refidJSONString).RootElement.EnumerateObject().ToDictionary(x => x.Name, x => x.Value.GetString());
     }
     public struct NTPExtensionField {
         int FieldType;
@@ -26,12 +33,14 @@ namespace NetTimeSyncTools_winform
     {
         public ushort Version_Number = 4;                // The maximum Version is 4.
         public ushort Leap_Indicator = 0;
+        public int epoch = 0;
         public string serverName = "";
         public string serverIdentifier = "";
-        public short status = 0;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
+        short status = 0;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
         public NTPExtensionField[] extensions = new NTPExtensionField[2];
         public uint Root_Delay = 0;
-        public int error = 0;
+        int error = 0;
+        string errorInfo = "";
         public ushort Mode = 3;
         public short Stradium = 0;
         public short Poll = 0;
@@ -43,8 +52,22 @@ namespace NetTimeSyncTools_winform
         public long TransmitTimeStamp = 0;
         public int KeyIdentifier = 0;
         public long CriptoCheckSum = 0;
+        public long StartTime = 0;
         public long EndTime = 0;
-
+        public string getStatus() {
+            switch (status) {
+                case 0:
+                    return "Unknown";
+                case 1:
+                    return "Waiting...";
+                case 2:
+                    return "Normal";
+                case 3:
+                    return "Failed:0x" + error.ToString("x") + "("+errorInfo+")";
+                default:
+                    return "Unknown";
+            }
+        }
         long utcTimeStamp2NTPTimeStamp(long timestamp) {
             DateTime utcTime = DateTime.UtcNow;
             DateTime baseTime = new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -57,18 +80,42 @@ namespace NetTimeSyncTools_winform
 
         public NTPClass() {
             DateTime currentDate = DateTime.Now;
+            
             TransmitTimeStamp = utcTimeStamp2NTPTimeStamp(currentDate.Ticks);
             
         }
+        public string getCurrentTime() {
+            if (status != 2) return "";
+            //1. Calculate the time difference between the current time and the time when the NTP packet was sent.
 
-        void handle_NTPThread()
-        {
+            ulong t1 = 0;
+            t1 = ((ulong)ReceiveTimeStamp >> 32) * 10000000 + (((ulong)ReceiveTimeStamp & 0xffffffff) * 232) / 100000 - NTPConstraint.NtpUtcBaseDiff * 10000000;
+            if (ReceiveTimeStamp >> 63 == 0){
+                t1 += NTPConstraint.NtpEpochMillSeconds;
+            }
+            ulong t2 = 0;
+            t2 = ((ulong)TransmitTimeStamp >> 32) * 10000000 + (((ulong)TransmitTimeStamp & 0xffffffff) * 232) / 100000 - NTPConstraint.NtpUtcBaseDiff * 10000000;
+            if (TransmitTimeStamp >> 63 == 0)
+            {
+                t2 += NTPConstraint.NtpEpochMillSeconds;
+            }
+            long curTimeStamp = (long)(((ulong)EndTime + t2 + t1 - (ulong)StartTime) / 2 + (ulong)((Environment.TickCount - EndTime) * 10000));
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            DateTime dt = startTime.AddTicks(curTimeStamp);
+            //DateTime currentDate = new DateTime((long)(((ulong)EndTime + t2 + t1 - (ulong)StartTime)/2+(ulong)((Environment.TickCount-EndTime)*10000)),DateTimeKind.Utc);
+            //currentDate = currentDate.AddYears(1970);
+            
+            return dt.ToLocalTime().ToString();
+        }
+        bool send(Socket s) {
             try
             {
-                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                s.Connect(serverName, 123);
+
+                s.ReceiveTimeout = 5000;
+                s.Connect(serverName, NTPConstraint.NtpDefaultPort);
                 status = 1;
                 byte[] sendbuf = NTPv4();
+                StartTime = Environment.TickCount;
                 s.Send(sendbuf);
                 byte[] receive = new byte[48];
                 s.Receive(receive);
@@ -77,19 +124,51 @@ namespace NetTimeSyncTools_winform
                 s.Close();
                 Console.WriteLine("We have sent the message.");
                 status = 2;
+                return true;
             }
-            catch (Exception e) {
+            catch (System.ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+                s.Close();
+                error = e.HResult;
+                errorInfo = e.Message;
+                return false;
+            }
+            catch (Exception e)
+            {
                 status = 3;
                 error = e.HResult;
+                errorInfo = e.Message;
                 Console.WriteLine(e.Message);
+                s.Close();
+                return false;
             }
+            finally
+            {
+                s.Close();
+            }
+        }
+        void handle_NTPThread(object param)
+        {
+            Socket sV4 = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            Socket sV6 = new Socket(AddressFamily.InterNetworkV6, SocketType.Dgram, ProtocolType.Udp);
+            status = 1;
+            if (!send(sV4) && !send(sV6))
+            { 
+                status = 3;
+            }
+
+            
         }
 
         public void sendNTPpacket() {
             //NTPListener uDPListener = new NTPListener(this);
             //uDPListener.Main();
-            Thread thread = new Thread(handle_NTPThread);
-            thread.Start();
+            
+            ThreadPool.QueueUserWorkItem(handle_NTPThread);
+            
+            //Thread thread = new Thread(handle_NTPThread);
+            //thread.Start((object)s);
         }
         byte[] NTPv4() {
 
@@ -116,20 +195,31 @@ namespace NetTimeSyncTools_winform
         {
             Version_Number = (ushort)(packet[0] >> 3 & 0x07);
             Leap_Indicator = (ushort)(packet[0] >> 6 & 0x03);
-            Mode = (ushort)(packet[0] & 0x07);
+            //Mode = (ushort)(packet[0] & 0x07);
             Stradium = packet[1];
             Poll = packet[2];
             Precision = packet[3];
             Root_Delay = (uint)(packet[4] << 24 | packet[5] << 16 | packet[6] << 8 | packet[7]);
             ReferenceIdentifier = (int)(packet[12] << 24 | packet[13] << 16 | packet[14] << 8 | packet[15]);
-            ReferenceTimeStamp = (long)(packet[16] << 56 | packet[17] << 48 | packet[18] << 40 | packet[19] << 32 | packet[20] << 24 | packet[21] << 16 | packet[22] << 8 | packet[23]);
-            OriginateTimeStamp = (long)(packet[24] << 56 | packet[25] << 48 | packet[26] << 40 | packet[27] << 32 | packet[28] << 24 | packet[29] << 16 | packet[30] << 8 | packet[31]);
-            ReceiveTimeStamp = (long)(packet[32] << 56 | packet[33] << 48 | packet[34] << 40 | packet[35] << 32 | packet[36] << 24 | packet[37] << 16 | packet[38] << 8 | packet[39]);
-            TransmitTimeStamp = packet[40] << 56 | packet[41] << 48 | packet[42] << 40 | packet[43] << 32 | packet[44] << 24 | packet[45] << 16 | packet[46] << 8 | packet[47];
-
+            ReferenceTimeStamp = (long)(packet[16]) << 56 | (long)(packet[17]) << 48 | (long)(packet[18]) << 40 | (long)(packet[19]) << 32 | (long)(packet[20]) << 24 | (long)(packet[21] << 16) | (long)(packet[22] << 8) | (long)packet[23];
+            OriginateTimeStamp = (long)(packet[24]) << 56 | (long)(packet[25]) << 48 | (long)(packet[26]) << 40 | (long)(packet[27]) << 32 | (long)(packet[28]) << 24 | (long)(packet[29]) << 16 | (long)(packet[30]) << 8 | (long)packet[31];
+            ReceiveTimeStamp = (long)(packet[32]) << 56 | (long)(packet[33]) << 48 | (long)(packet[34]) << 40 | (long)(packet[35]) << 32 | (long)(packet[36]) << 24 | (long)(packet[37] << 16) | (long)(packet[38] << 8) | (long)packet[39];
+            TransmitTimeStamp = (long)(packet[40] ) << 56 | (long)(packet[41] ) << 48 | (long)(packet[42] ) << 40 | (long)(packet[43] ) << 32 | (long)(packet[44] ) << 24 | (long)(packet[45] << 16) | (long)(packet[46] << 8) | (long)packet[47];
         }
         public string GetIP() {
+            if (status != 2)return "";
             int ip = ReferenceIdentifier;
+            string clockSource = "";
+            if (Stradium == 1 || Stradium == 0)
+            {
+                clockSource = ""+(char)(ip >> 24)+ (char)((ip >> 16) & 0xff) + (char)((ip >> 8) & 0xff) + (char)(ip & 0xff);
+                clockSource = clockSource.Trim().Replace("\0","");
+                string outStr = "";
+                if (NTPConstraint.refid.TryGetValue(clockSource,out outStr)) {
+                    return clockSource + "(" + outStr + ")";
+                }
+                return clockSource;
+            }
             return $"{ip >> 24 & 0xff}.{ip >> 16 & 0xff}.{ip >> 8 & 0xff}.{ip & 0xff}";
         }
     }

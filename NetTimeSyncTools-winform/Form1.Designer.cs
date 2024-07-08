@@ -1,5 +1,14 @@
 ﻿namespace NetTimeSyncTools_winform
 {
+    public class DoubleBufferedListView : System.Windows.Forms.ListView
+    {
+        public DoubleBufferedListView()
+        {
+
+            this.DoubleBuffered = true;
+        }
+
+    }
     partial class Form1
     {
         /// <summary>
@@ -30,12 +39,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.ServerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ServerURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ServerIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ServerTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.serverStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,43 +50,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.listView1 = new NetTimeSyncTools_winform.DoubleBufferedListView();
+            this.ServerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ServerURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ServerIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ServerTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.serverStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ServerName,
-            this.ServerURL,
-            this.ServerIP,
-            this.ServerTime,
-            this.serverStatus});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            resources.ApplyResources(this.listView1, "listView1");
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // ServerName
-            // 
-            resources.ApplyResources(this.ServerName, "ServerName");
-            // 
-            // ServerURL
-            // 
-            resources.ApplyResources(this.ServerURL, "ServerURL");
-            // 
-            // ServerIP
-            // 
-            resources.ApplyResources(this.ServerIP, "ServerIP");
-            // 
-            // ServerTime
-            // 
-            resources.ApplyResources(this.ServerTime, "ServerTime");
-            // 
-            // serverStatus
-            // 
-            resources.ApplyResources(this.serverStatus, "serverStatus");
             // 
             // label1
             // 
@@ -122,6 +95,7 @@
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -134,6 +108,7 @@
             resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -145,6 +120,43 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ServerName,
+            this.ServerURL,
+            this.ServerIP,
+            this.ServerTime,
+            this.serverStatus});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            resources.ApplyResources(this.listView1, "listView1");
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.DoubleClick += new System.EventHandler(this.item_dblCLcked);
+            // 
+            // ServerName
+            // 
+            resources.ApplyResources(this.ServerName, "ServerName");
+            // 
+            // ServerURL
+            // 
+            resources.ApplyResources(this.ServerURL, "ServerURL");
+            // 
+            // ServerIP
+            // 
+            resources.ApplyResources(this.ServerIP, "ServerIP");
+            // 
+            // ServerTime
+            // 
+            resources.ApplyResources(this.ServerTime, "ServerTime");
+            // 
+            // serverStatus
+            // 
+            resources.ApplyResources(this.serverStatus, "serverStatus");
             // 
             // Form1
             // 
@@ -171,8 +183,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listView1;
+        
+        private DoubleBufferedListView listView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

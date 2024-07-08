@@ -4,15 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace NetTimeSyncTools_winform
 {
-
-   
-
         public partial class Form1 : Form
         {
         
@@ -21,7 +20,6 @@ namespace NetTimeSyncTools_winform
         {
             
             DoubleBuffered = true;
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             InitializeComponent();
         }
@@ -41,11 +39,12 @@ namespace NetTimeSyncTools_winform
             localtimes.Text = dateTime.ToString();
             int startedTime = Environment.TickCount;
             startTime.Text = $"{startedTime / 3600000}:{plusZero(startedTime / 60000 % 60)}:{plusZero(startedTime / 1000 % 60)}";
-            UserDefinedGlobalData.globalData.ForEach((ntp) =>
+            for (int i = 0; i < UserDefinedGlobalData.globalData.Count; i++)
             {
-
-                listView1.FindItemWithText(ntp.serverIdentifier).SubItems[3].Text = "" + ntp.ReceiveTimeStamp;
-            });
+                listView1.Items[i].SubItems[4].Text = "" + UserDefinedGlobalData.globalData[i].getStatus();
+                listView1.Items[i].SubItems[2].Text = "" + UserDefinedGlobalData.globalData[i].GetIP();
+                listView1.Items[i].SubItems[3].Text = "" + UserDefinedGlobalData.globalData[i].getCurrentTime();
+            };
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,15 +57,44 @@ namespace NetTimeSyncTools_winform
         private void Form1_Focus(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            UserDefinedGlobalData.globalData.ForEach((ntp) =>
+            for (int i = 0; i < UserDefinedGlobalData.globalData.Count; i++)
             {
                 ListViewItem item = new ListViewItem();
-                item.Text = ntp.serverIdentifier;
-                item.SubItems.Add(ntp.serverName);
-                item.SubItems.Add(ntp.GetIP());
-                item.SubItems.Add("" + ntp.ReceiveTimeStamp);
+                item.Text = UserDefinedGlobalData.globalData[i].serverIdentifier;
+                item.SubItems.Add(UserDefinedGlobalData.globalData[i].serverName);
+                item.SubItems.Add(UserDefinedGlobalData.globalData[i].GetIP());
+                item.SubItems.Add("" + UserDefinedGlobalData.globalData[i].getCurrentTime());
+                item.SubItems.Add("" + UserDefinedGlobalData.globalData[i].getStatus());
                 listView1.Items.Add(item);
-            });
+            }
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (var item in UserDefinedGlobalData.globalData)
+            {
+                item.sendNTPpacket();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            if (listView1.SelectedItems.Count == 1) {
+                int Index = listView1.SelectedItems[0].Index;
+                MainDialog mainDialog = new MainDialog(Index, UserDefinedGlobalData.globalData[Index]);
+                mainDialog.ShowDialog(this);
+            }
+        }
+        private void item_dblCLcked(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                int Index = listView1.SelectedItems[0].Index;
+                MainDialog mainDialog = new MainDialog(Index, UserDefinedGlobalData.globalData[Index]);
+                mainDialog.ShowDialog(this);
+            }
         }
     }
     

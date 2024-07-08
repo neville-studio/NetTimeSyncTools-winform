@@ -68,6 +68,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -90,8 +91,10 @@
             // 
             // MainDialog
             // 
+            this.AcceptButton = this.button1;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button2;
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
@@ -105,6 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "MainDialog";
             this.ShowInTaskbar = false;
+            this.Load += new System.EventHandler(this.MainDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
