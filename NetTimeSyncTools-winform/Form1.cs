@@ -12,13 +12,16 @@ using static System.Net.WebRequestMethods;
 
 namespace NetTimeSyncTools_winform
 {
-        public partial class Form1 : Form
-        {
-        
-
+    public partial class Form1 : Form
+    {
+        static Form1 Forms;
+        static bool needUpdate = false;
+        public static void updateNotify() {
+            needUpdate = true;
+        }
         public Form1()
         {
-            
+            Forms = this;
             DoubleBuffered = true;
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             InitializeComponent();
@@ -39,10 +42,13 @@ namespace NetTimeSyncTools_winform
             localtimes.Text = dateTime.ToString();
             int startedTime = Environment.TickCount;
             startTime.Text = $"{startedTime / 3600000}:{plusZero(startedTime / 60000 % 60)}:{plusZero(startedTime / 1000 % 60)}";
+            if (needUpdate)
+            {
+                Update_List();
+                needUpdate = false;
+            }
             for (int i = 0; i < UserDefinedGlobalData.globalData.Count; i++)
             {
-                listView1.Items[i].SubItems[4].Text = "" + UserDefinedGlobalData.globalData[i].getStatus();
-                listView1.Items[i].SubItems[2].Text = "" + UserDefinedGlobalData.globalData[i].GetIP();
                 listView1.Items[i].SubItems[3].Text = "" + UserDefinedGlobalData.globalData[i].getCurrentTime();
             };
         }
@@ -56,6 +62,11 @@ namespace NetTimeSyncTools_winform
 
         private void Form1_Focus(object sender, EventArgs e)
         {
+            Update_List();
+            
+        }
+        private void Update_List() 
+        {
             listView1.Items.Clear();
             for (int i = 0; i < UserDefinedGlobalData.globalData.Count; i++)
             {
@@ -65,11 +76,10 @@ namespace NetTimeSyncTools_winform
                 item.SubItems.Add(UserDefinedGlobalData.globalData[i].GetIP());
                 item.SubItems.Add("" + UserDefinedGlobalData.globalData[i].getCurrentTime());
                 item.SubItems.Add("" + UserDefinedGlobalData.globalData[i].getStatus());
+                item.SubItems.Add("" + UserDefinedGlobalData.globalData[i].getOffset() + "ms");
                 listView1.Items.Add(item);
             }
-            
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             foreach (var item in UserDefinedGlobalData.globalData)
@@ -94,6 +104,19 @@ namespace NetTimeSyncTools_winform
                 int Index = listView1.SelectedItems[0].Index;
                 MainDialog mainDialog = new MainDialog(Index, UserDefinedGlobalData.globalData[Index]);
                 mainDialog.ShowDialog(this);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int Index = -1;
+            if(listView1.SelectedItems.Count == 1)
+                Index = listView1.SelectedItems[0].Index;
+            if (Index > -1 && MessageBox.Show("确认删除此项目吗？","删除时间服务器",MessageBoxButtons.OKCancel) ==DialogResult.OK)
+            {
+                //int Index = listView1.SelectedItems[0].Index;
+                UserDefinedGlobalData.globalData.RemoveAt(Index);
+                Update_List();
             }
         }
     }

@@ -56,6 +56,7 @@
             this.ServerIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ServerTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.serverStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -102,6 +103,7 @@
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -123,15 +125,16 @@
             // 
             // listView1
             // 
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ServerName,
             this.ServerURL,
             this.ServerIP,
             this.ServerTime,
-            this.serverStatus});
+            this.serverStatus,
+            this.timeOffset});
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -157,6 +160,10 @@
             // serverStatus
             // 
             resources.ApplyResources(this.serverStatus, "serverStatus");
+            // 
+            // timeOffset
+            // 
+            resources.ApplyResources(this.timeOffset, "timeOffset");
             // 
             // Form1
             // 
@@ -201,6 +208,7 @@
         private System.Windows.Forms.ColumnHeader ServerTime;
         private System.Windows.Forms.ColumnHeader serverStatus;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ColumnHeader timeOffset;
     }
 }
 
