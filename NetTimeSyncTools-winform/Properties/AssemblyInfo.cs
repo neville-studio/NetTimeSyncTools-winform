@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Neville Studio")]
 [assembly: AssemblyProduct("NetTimeSyncTools-winform")]
-[assembly: AssemblyCopyright("Copyright ©  2024 Neville Studio, all rights reserved")]
+[assembly: AssemblyCopyright("Copyright ©  2024 Neville Studio, all rights reserved.")]
 [assembly: AssemblyTrademark("Neville Studio")]
 [assembly: AssemblyCulture("")]
 

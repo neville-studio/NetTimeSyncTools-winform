@@ -41,7 +41,7 @@ namespace NetTimeSyncTools_winform
         public int epoch = 0;
         public string serverName = "";
         public string serverIdentifier = "";
-        short status = 0;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
+        public short status = 0;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
         public NTPExtensionField[] extensions = new NTPExtensionField[2];
         public uint Root_Delay = 0;
         int error = 0;
@@ -51,10 +51,10 @@ namespace NetTimeSyncTools_winform
         public short Poll = 0;
         public short Precision = 0;
         public int ReferenceIdentifier = 0;
-        public long ReferenceTimeStamp = 0;
-        public long OriginateTimeStamp = 0;
-        public long ReceiveTimeStamp = 0;
-        public long TransmitTimeStamp = 0;
+        long ReferenceTimeStamp = 0;
+        long OriginateTimeStamp = 0;
+        long ReceiveTimeStamp = 0;
+        long TransmitTimeStamp = 0;
         public int KeyIdentifier = 0;
         public long CriptoCheckSum = 0;
         public long StartTime = 0;
