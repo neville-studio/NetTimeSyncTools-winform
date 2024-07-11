@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NetTimeSyncTools_winform
@@ -26,7 +19,7 @@ namespace NetTimeSyncTools_winform
 
 
             CopyRightLabel.Text = asmcpr.Copyright;
-            VersionLabel.Text = ""+Application.ProductName+", V"+Application.ProductVersion;
+            VersionLabel.Text = "" + Application.ProductName + ", V" + Application.ProductVersion;
         }
 
         private void ViewProject_Click(object sender, EventArgs e)

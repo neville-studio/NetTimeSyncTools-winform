@@ -4,7 +4,6 @@
     {
         public DoubleBufferedListView()
         {
-
             this.DoubleBuffered = true;
         }
 
@@ -121,6 +120,7 @@
             resources.ApplyResources(this.button5, "button5");
             this.button5.Name = "button5";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // timer1
             // 
@@ -136,22 +136,21 @@
             // 
             // statusStrip1
             // 
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.AllowMerge = false;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.SizingGrip = false;
             // 
             // toolStripStatusLabel1
             // 
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             // 
             // listView1
             // 
-            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ServerName,
             this.ServerURL,
@@ -161,10 +160,12 @@
             this.timeOffset});
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.item_dblCLcked);
             // 
             // ServerName
@@ -212,6 +213,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Activated += new System.EventHandler(this.Form1_Focus);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

@@ -2,45 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Collections;
-using System.Threading;
 using System.Text.Json;
-using static System.Net.WebRequestMethods;
-using System.Text.Json.Serialization;
-using System.Text.Json.Nodes;
+using System.Threading;
 
 namespace NetTimeSyncTools_winform
 {
-    static class NTPConstraint {
+    static class NTPConstraint
+    {
         public const int NtpDefaultPort = 123;
         public const long NtpEpochMillSeconds = 0x100000000 * 1000;
         public const long NtpUtcBaseDiff = 2208988800;
         const string refidJSONString = "{\"LOCL\": \"Undisciplined Local Clock\",\"GOES\": \"Geosynchronous Orbit Environment Satellite\",\"GPS\": \"Global Position System\",\"GAL\": \"Galileo Positioning System\",\"PPS\": \"Generic pulse-per-second\",\"IRIG\": \"Inter-Range Instrumentation Group\",\"WWVB\": \"LF Radio WWVB Ft. Collins, CO 60 kHz\",\"DCF\": \"LF Radio DCF77 Mainflingen, DE 77.5 kHz\",\"HBG\": \"LF Radio HBG Prangins, HB 75 kHz\",\"MSF\": \"LF Radio MSF Anthorn, UK 60 kHz\",\"JJY\": \"LF Radio JJY Fukushima, JP 40 kHz, Saga, JP 60 kHz\",\"LORC\": \"MF Radio LORAN C station, 100 kHz\",\"TDF\": \"MF Radio Allouis, FR 162 kHz\",\"CHU\": \"HF Radio CHU Ottawa, Ontario\",\"WWV\": \"HF Radio WWV Ft. Collins, CO\",\"WWVH\": \"HF Radio WWVH Kauai, HI\",\"NIST\": \"NIST telephone modem\",\"ACTS\": \"NIST telephone modem\",\"USNO\": \"USNO telephone modem\",\"PTB\": \"European telephone modem\",\"BDS\": \"Beidou Navigation Satellite System\",\"PTP\": \"Precession Time Protocal\",\"MRS\":\"Manual Reference System\",\"DFM\":\"UTC(DFM)\"}";
-        public static Dictionary<string,string> refid = JsonDocument.Parse(refidJSONString).RootElement.EnumerateObject().ToDictionary(x => x.Name, x => x.Value.GetString());
+        public static Dictionary<string, string> refid = JsonDocument.Parse(refidJSONString).RootElement.EnumerateObject().ToDictionary(x => x.Name, x => x.Value.GetString());
         const string kissodeathcodeJSONString = "{\"ACST\":\"The association belongs to a unicast server\",\"AUTH\":\"Server authentication failed\",\"AUTO\":\"Autokey sequence failed\",\"BCST\":\"The association belongs to a broadcast server\",\"CRYP\":\"Cryptographic authentication or identification failed\",\"DENY\":\"Access denied by remote server\",\"DROP\":\"Lost peer in symmetric mode\",\"RSTR\":\"Access denied due to local policy\",\"INIT\":\"The association has not yet synchronized for the first time\",\"MCST\":\"The association belongs to a dynamically discovered server\",\"NKEY\":\"No key found. Either the key was never installed or is not trusted\",\"NTSN\":\"Network Time Security (NTS) negative-acknowledgment (NAK)\",\"RATE\":\"Rate exceeded. The server has temporarily denied access because the client exceeded the rate threshold\",\"RMOT\":\"Alteration of association from a remote host running ntpdc.\",\"STEP\":\"A step change in system time has occurred, but the association has not yet resynchronized\"}";
-        public static Dictionary<string,string> kissocode = JsonDocument.Parse(refidJSONString).RootElement.EnumerateObject().ToDictionary(x => x.Name, x => x.Value.GetString());
+        public static Dictionary<string, string> kissocode = JsonDocument.Parse(refidJSONString).RootElement.EnumerateObject().ToDictionary(x => x.Name, x => x.Value.GetString());
     }
-    public struct NTPExtensionField {
+    public struct NTPExtensionField
+    {
         int FieldType;
         uint Length;
         int Value;
         int Padding;
     }
-    class NoTimeFoundException : Exception {
+    class NoTimeFoundException : Exception
+    {
         public NoTimeFoundException() : base("No time found.") { }
     }
     public class NTPClass
     {
-        public ushort Version_Number = 4;                // The maximum Version is 4.
+        public ushort Version_Number { get; set; } = 4;                // The maximum Version is 4.
         public ushort Leap_Indicator = 0;
         public int epoch = 0;
-        public string serverName = "";
-        public string serverIdentifier = "";
+        public string serverName { get; set; } = "";
+        public string serverIdentifier { get; set; } = "";
         public short status = 0;             // status = 0: unknown. status = 1 : Sending; status = 2: success. status = 3: error.
         public NTPExtensionField[] extensions = new NTPExtensionField[2];
         public uint Root_Delay = 0;
@@ -61,35 +55,52 @@ namespace NetTimeSyncTools_winform
         public long EndTime = 0;
         short IPVersion = 4;
         int offset = 0;
-        public string getStatus() {
-            switch (status) {
-                case 0:
-                    return "Unknown";
+        public string getStatus()
+        {
+
+            switch (status)
+            {
+
                 case 1:
-                    return "Waiting...";
+                    string connecting = UserDefinedGlobalData.resourceManager.GetString("String_Connecting");
+                    return connecting;
                 case 2:
-                    return "Normal";
+                    string normal = UserDefinedGlobalData.resourceManager.GetString("String_Successful");
+                    return normal;
                 case 3:
-                    return "Failed:0x" + error.ToString("x") + "("+errorInfo+")";
+                    string failed = UserDefinedGlobalData.resourceManager.GetString("String_Failed");
+                    return String.Format(failed, error.ToString("x"), errorInfo);
+                case 0:
                 default:
-                    return "Unknown";
+                    string unknown = UserDefinedGlobalData.resourceManager.GetString("String_Unknown");
+                    return unknown;
             }
         }
-        long utcTimeStamp2NTPTimeStamp(long timestamp) {
+        long utcTimeStamp2NTPTimeStamp(long timestamp)
+        {
             DateTime utcTime = DateTime.UtcNow;
             DateTime baseTime = new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
             long diff = utcTime.Ticks - baseTime.Ticks;
-            long result = ((diff / 10000000) << 32) + (diff % 10000000) * 10000 ;
+            long result = ((diff / 10000000) << 32) + (diff % 10000000) * 10000;
             return result;
 
         }
 
-        public NTPClass() {
+        public NTPClass()
+        {
             DateTime currentDate = DateTime.Now;
-            
+
             TransmitTimeStamp = utcTimeStamp2NTPTimeStamp(currentDate.Ticks);
-            
+
+        }
+        public NTPClass(string serverName,string serverIdentifier, int VersionNumber)
+        {
+            this.serverName = serverName;
+            this.serverIdentifier = serverIdentifier;
+            this.Version_Number = (ushort)VersionNumber;
+            this.sendNTPpacket();
+
         }
         public DateTime getCurrentTimeStamp()
         {
@@ -113,7 +124,8 @@ namespace NetTimeSyncTools_winform
             DateTime dt = startTime.AddTicks(curTimeStamp);
             return dt;
         }
-        public string getCurrentTime() {
+        public string getCurrentTime()
+        {
 
             //DateTime currentDate = new DateTime((long)(((ulong)EndTime + t2 + t1 - (ulong)StartTime)/2+(ulong)((Environment.TickCount-EndTime)*10000)),DateTimeKind.Utc);
             //currentDate = currentDate.AddYears(1970);
@@ -122,11 +134,13 @@ namespace NetTimeSyncTools_winform
                 DateTime dt = getCurrentTimeStamp();
                 return dt.ToLocalTime().ToString();
             }
-            catch (NoTimeFoundException e) {
+            catch (NoTimeFoundException e)
+            {
                 return "";
             }
         }
-        bool send(Socket s) {
+        bool send(Socket s)
+        {
             try
             {
 
@@ -175,14 +189,15 @@ namespace NetTimeSyncTools_winform
             Socket sV6 = new Socket(AddressFamily.InterNetworkV6, SocketType.Dgram, ProtocolType.Udp);
             status = 1;
             if (!send(sV4) && !send(sV6))
-            { 
+            {
                 status = 3;
             }
             Form1.updateNotify();
 
-            
+
         }
-        public int getOffset() {
+        public int getOffset()
+        {
             return offset;
         }
         int calcOffset()
@@ -190,31 +205,34 @@ namespace NetTimeSyncTools_winform
             DateTime dt1 = DateTime.Now;
             try
             {
-                 dt1= getCurrentTimeStamp();
-            }catch (NoTimeFoundException e)
+                dt1 = getCurrentTimeStamp();
+            }
+            catch (NoTimeFoundException e)
             {
                 return 0;
             }
-            DateTime dt2 = new DateTime(DateTime.Now.Ticks,DateTimeKind.Utc);
-            return (int)(dt1.Ticks - dt2.Ticks) / 10000;            
+            DateTime dt2 = new DateTime(DateTime.Now.Ticks, DateTimeKind.Utc);
+            return (int)(dt1.Ticks - dt2.Ticks) / 10000;
         }
-        public void sendNTPpacket() {
+        public void sendNTPpacket()
+        {
             //NTPListener uDPListener = new NTPListener(this);
             //uDPListener.Main();
-            
+
             ThreadPool.QueueUserWorkItem(handle_NTPThread);
-            
+
             //Thread thread = new Thread(handle_NTPThread);
             //thread.Start((object)s);
         }
-        byte[] NTPv4() {
+        byte[] NTPv4()
+        {
 
             byte[] buf = new byte[48];
-            buf[0] = (byte)(Leap_Indicator<< 6 | Version_Number<< 3 | Mode);
+            buf[0] = (byte)(Leap_Indicator << 6 | Version_Number << 3 | Mode);
             buf[1] = (byte)Stradium;
             buf[2] = (byte)Poll;
             buf[3] = (byte)Precision;
-            buf[4] = (byte)(Root_Delay >> 24 &0xff);
+            buf[4] = (byte)(Root_Delay >> 24 & 0xff);
             buf[5] = (byte)(Root_Delay >> 16 & 0xff);
             buf[6] = (byte)(Root_Delay >> 8 & 0xff);
             buf[7] = (byte)(Root_Delay & 0xff);
@@ -241,10 +259,11 @@ namespace NetTimeSyncTools_winform
             ReferenceTimeStamp = (long)(packet[16]) << 56 | (long)(packet[17]) << 48 | (long)(packet[18]) << 40 | (long)(packet[19]) << 32 | (long)(packet[20]) << 24 | (long)(packet[21] << 16) | (long)(packet[22] << 8) | (long)packet[23];
             OriginateTimeStamp = (long)(packet[24]) << 56 | (long)(packet[25]) << 48 | (long)(packet[26]) << 40 | (long)(packet[27]) << 32 | (long)(packet[28]) << 24 | (long)(packet[29]) << 16 | (long)(packet[30]) << 8 | (long)packet[31];
             ReceiveTimeStamp = (long)(packet[32]) << 56 | (long)(packet[33]) << 48 | (long)(packet[34]) << 40 | (long)(packet[35]) << 32 | (long)(packet[36]) << 24 | (long)(packet[37] << 16) | (long)(packet[38] << 8) | (long)packet[39];
-            TransmitTimeStamp = (long)(packet[40] ) << 56 | (long)(packet[41] ) << 48 | (long)(packet[42] ) << 40 | (long)(packet[43] ) << 32 | (long)(packet[44] ) << 24 | (long)(packet[45] << 16) | (long)(packet[46] << 8) | (long)packet[47];
+            TransmitTimeStamp = (long)(packet[40]) << 56 | (long)(packet[41]) << 48 | (long)(packet[42]) << 40 | (long)(packet[43]) << 32 | (long)(packet[44]) << 24 | (long)(packet[45] << 16) | (long)(packet[46] << 8) | (long)packet[47];
         }
-        public string GetIP() {
-            if (status != 2)return "";
+        public string GetIP()
+        {
+            if (status != 2) return "";
             int ip = ReferenceIdentifier;
             string clockSource = "";
             if (Stradium == 1)
@@ -270,11 +289,11 @@ namespace NetTimeSyncTools_winform
                 }
                 return kissocode;
             }
-            if(IPVersion == 4)
+            if (IPVersion == 4)
                 return $"{ip >> 24 & 0xff}.{ip >> 16 & 0xff}.{ip >> 8 & 0xff}.{ip & 0xff}";
             else
                 return $"{(ip >> 16 & 0xffff).ToString("x")}:{(ip & 0xffff).ToString("x")}";
         }
     }
-    
+
 }

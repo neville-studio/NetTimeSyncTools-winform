@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NetTimeSyncTools_winform
@@ -18,13 +11,13 @@ namespace NetTimeSyncTools_winform
         public MainDialog()
         {
             InitializeComponent();
-         
+
         }
-        public MainDialog(int Index,NTPClass ntpClass)
-        { 
+        public MainDialog(int Index, NTPClass ntpClass)
+        {
             this.index = Index;
             this.ntpClass = ntpClass;
-            
+
             Method = "Edit";
             InitializeComponent();
             ImeMode = ImeMode.OnHalf;
@@ -33,9 +26,10 @@ namespace NetTimeSyncTools_winform
         {
             serverIdentifier.ImeMode = ImeMode.OnHalf;
             serverNameBox.ImeMode = ImeMode.OnHalf;
-            if (Method == "Edit") {
+            if (Method == "Edit")
+            {
                 serverIdentifier.Text = ntpClass.serverIdentifier;
-               
+
                 serverNameBox.Text = ntpClass.serverName;
                 comboBox1.SelectedIndex = ntpClass.Version_Number - 3;
             }
@@ -65,14 +59,14 @@ namespace NetTimeSyncTools_winform
             }
             else
             {
-                ntpClass.serverIdentifier = serverIdentifier.Text; 
+                ntpClass.serverIdentifier = serverIdentifier.Text;
                 ntpClass.serverName = serverNameBox.Text;
                 ntpClass.Version_Number = (ushort)(comboBox1.SelectedIndex + 3);
                 ntpClass.sendNTPpacket();
                 UserDefinedGlobalData.globalData[index] = ntpClass;
                 this.Dispose();
             }
-           
+
         }
     }
 }
