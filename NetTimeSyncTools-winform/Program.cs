@@ -32,7 +32,7 @@ namespace NetTimeSyncTools_winform
             var partialObjectsList = new List<object>();
             foreach (var item in globalData)
             {
-                var partialObject = new {  item.serverIdentifier,item.serverName, item.Version_Number };
+                var partialObject = new { item.serverIdentifier, item.serverName, item.Version_Number };
                 partialObjectsList.Add(partialObject);
             }
             // 一次性将整个列表序列化为 JSON 字符串
@@ -74,7 +74,7 @@ namespace NetTimeSyncTools_winform
             Application.Run(new Form1());
         }
 
-       
+
 
 
     }

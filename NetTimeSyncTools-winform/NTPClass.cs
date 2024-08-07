@@ -94,7 +94,7 @@ namespace NetTimeSyncTools_winform
             TransmitTimeStamp = utcTimeStamp2NTPTimeStamp(currentDate.Ticks);
 
         }
-        public NTPClass(string serverName,string serverIdentifier, int VersionNumber)
+        public NTPClass(string serverName, string serverIdentifier, int VersionNumber)
         {
             this.serverName = serverName;
             this.serverIdentifier = serverIdentifier;

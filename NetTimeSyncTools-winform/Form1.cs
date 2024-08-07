@@ -170,16 +170,16 @@ namespace NetTimeSyncTools_winform
                 Update_List();
             }
         }
-       
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Assembly asm = Assembly.GetExecutingAssembly();//如果是当前程序集
-            
+
             AssemblyCopyrightAttribute asmcpr = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(asm, typeof(AssemblyCopyrightAttribute));
 
 
             CopyrightLabel.Text = asmcpr.Copyright;
-            if(UserDefinedGlobalData.globalData.Count > 0)Update_List();
+            if (UserDefinedGlobalData.globalData.Count > 0) Update_List();
             UpdateUI();
         }
 
@@ -216,14 +216,15 @@ namespace NetTimeSyncTools_winform
             UserDefinedGlobalData.WriteGlobalNTPGlobalDataToDB();
         }
         void UpdateUI()
-        { 
+        {
             if (listView1.SelectedItems.Count == 1 && listView1.SelectedItems[0].Index > -1)
             {
                 button2.Enabled = true;
                 button3.Enabled = true;
                 button5.Enabled = true;
             }
-            else { 
+            else
+            {
                 button2.Enabled = false;
                 button3.Enabled = false;
                 button5.Enabled = false;
