@@ -178,6 +178,7 @@ namespace NetTimeSyncTools_winform
             AssemblyCopyrightAttribute asmcpr = (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(asm, typeof(AssemblyCopyrightAttribute));
 
 
+            
             CopyrightLabel.Text = asmcpr.Copyright;
             if (UserDefinedGlobalData.globalData.Count > 0) Update_List();
             UpdateUI();
