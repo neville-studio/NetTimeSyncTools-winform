@@ -138,6 +138,12 @@
   <data name="String_NeedUpdate" xml:space="preserve">
     <value>建议更新本机时间。</value>
   </data>
+  <data name="String_SetFailed" xml:space="preserve">
+    <value>时钟设置失败！</value>
+  </data>
+  <data name="String_SetSuccess" xml:space="preserve">
+    <value>时钟设置成功！</value>
+  </data>
   <data name="String_Successful" xml:space="preserve">
     <value>时钟获取成功</value>
   </data>

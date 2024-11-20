@@ -16,7 +16,7 @@ namespace NetTimeSyncTools_winform
         static void ReadMessageTable()
         {
             int culture = System.Globalization.CultureInfo.CurrentCulture.LCID;
-            string fn = @".\i18n\messageTable." + culture + ".resx";
+            string fn = @"\i18n\messageTable." + culture + ".resx";
             if (File.Exists(fn))
             {
                 resourceManager = new ResourceManager("NetTimeSyncTools_winform.i18n.messageTable." + culture, typeof(Form1).Assembly);
@@ -27,7 +27,7 @@ namespace NetTimeSyncTools_winform
             }
         }
         public static void WriteGlobalNTPGlobalDataToDB()
-        {
+        {  
             string filePath = @".\globalData.json";
             var partialObjectsList = new List<object>();
             foreach (var item in globalData)

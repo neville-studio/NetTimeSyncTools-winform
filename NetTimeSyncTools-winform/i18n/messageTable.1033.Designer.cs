@@ -124,6 +124,24 @@ namespace NetTimeSyncTools_winform.i18n {
         }
         
         /// <summary>
+        ///   查找类似 Set time failed. 的本地化字符串。
+        /// </summary>
+        internal static string String_SetFailed {
+            get {
+                return ResourceManager.GetString("String_SetFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Successfully set the time. 的本地化字符串。
+        /// </summary>
+        internal static string String_SetSuccess {
+            get {
+                return ResourceManager.GetString("String_SetSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Clock Updated Successfully. 的本地化字符串。
         /// </summary>
         internal static string String_Successful {

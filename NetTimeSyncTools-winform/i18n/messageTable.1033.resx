@@ -138,6 +138,12 @@
   <data name="String_NeedUpdate" xml:space="preserve">
     <value>Need Update.</value>
   </data>
+  <data name="String_SetFailed" xml:space="preserve">
+    <value>Set time failed.</value>
+  </data>
+  <data name="String_SetSuccess" xml:space="preserve">
+    <value>Successfully set the time.</value>
+  </data>
   <data name="String_Successful" xml:space="preserve">
     <value>Clock Updated Successfully.</value>
   </data>
