@@ -43,3 +43,24 @@ After January 12th, 2027, which means Windows Server 2016 ended its lifecycle. T
 Linux branch might be built after this reposity launched its first stable release.
 
 And After October 14th, 2025, we might merge linux Branch and Windows Branch, which use C# and .NET Platform.
+
+
+
+# Thanks:
+
+Thanks these Nuget packages which to help build this reposity:
+
+I get these packages from nuget.org, which Microsoft Visual Studio 2022 represent.
+
+Author: Microsoft
+
+- Microsoft.Bcl.AsyncInterfaces, v9.0.0, MIT License [Go to this project](https://dot.net/)
+- System.Buffer, v4.6.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
+- System.IO.Pipelines v9.0.0 [Go to this project](https://dot.net/)
+- System.Memory, v4.6.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
+- System.Numerics.Vectors, v4.6.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
+- System.Runtime.CompilerServices.Unsafe, v6.1.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
+- System.Text.Encodings.Web, v9.0.0, MIT License. [Go to this project](https://dot.net/)
+- System.Text.Json, v9.0.0, MIT License. [Go to this project](https://dot.net/)
+- System.Threading.Tasks.Extensions, v4.6.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
+- System.ValueTuple, v4.5.0, MIT License. [Go to this project](https://dot.net/)
