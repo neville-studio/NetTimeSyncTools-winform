@@ -52,7 +52,7 @@ Thanks these Nuget packages which to help build this reposity:
 
 I get these packages from nuget.org, which Microsoft Visual Studio 2022 represent.
 
-Author: Microsoft
+**Author: [Microsoft](https://github.com/microsoft):**
 
 - Microsoft.Bcl.AsyncInterfaces, v9.0.0, MIT License [Go to this project](https://dot.net/)
 - System.Buffer, v4.6.0, MIT License [Go to this project](https://github.com/dotnet/maintenance-packages)
