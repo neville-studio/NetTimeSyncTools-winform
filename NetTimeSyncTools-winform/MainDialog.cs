@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * @Author: Neville Studio <2840772674@qq.com>
+ * @Date: 2024-11-29 22:27:06
+ * @Function: Add/Edit dialog logics.
+ */
+using System;
 using System.Windows.Forms;
 
 namespace NetTimeSyncTools_winform

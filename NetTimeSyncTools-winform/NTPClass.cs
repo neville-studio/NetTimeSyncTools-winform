@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * @Author: Neville Studio <2840772674@qq.com>
+ * @Date: 2024-11-29 22:26:07
+ * @Function: Defined the NTP Package class and some constraints.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;

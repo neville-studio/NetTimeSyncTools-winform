@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * @Author: Neville Studio <2840772674@qq.com>
+ * @Date: 2024-11-29 22:25:18
+ * @Function: this is the main program file of the project
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Resources;
